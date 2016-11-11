@@ -1,1 +1,3 @@
-# frontend-practice
+# Prepare Dev Environment
+
+* Using bower
