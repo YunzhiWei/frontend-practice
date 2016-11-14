@@ -24,34 +24,33 @@
     <![endif]-->
 </head>
 
-<body ng-controller="dishDetailController as dishCtrl">
+<body ng-controller="DishDetailController">
 
     <div class="container">
         <div class="row row-content">
             <div class="col-xs-12">
               <div class="media-left media-middle">
                 <a href="#">
-                  <img class="media-object img-thumbnail" ng-src={{dishCtrl.dish.image}} alt="Uthappizza">
+                  <img class="media-object img-thumbnail" ng-src={{dish.image}} alt="Uthappizza">
                 </a>
               </div>
               <div class="media-body">
-                <h2 class="media-heading">{{dishCtrl.dish.name}}
-                  <span class="label label-danger">{{dishCtrl.dish.label}}</span>
-                  <span class="badge">{{dishCtrl.dish.price | currency}}</span>
+                <h2 class="media-heading">{{dish.name}}
+                  <span class="label label-danger">{{dish.label}}</span>
+                  <span class="badge">{{dish.price | currency}}</span>
                 </h2>
-                <p>{{dishCtrl.dish.description}}</p>
+                <p>{{dish.description}}</p>
               </div>
             </div>
             <div class="col-xs-9 col-xs-offset-1">
 
               <p>
                 <strong>Customer Comments</strong>
-                <span>Sort by: <input type="text" ng-model="dishCtrl.orderBy" placeholder="'rating':true"></span>
-                <span>{{dishCtrl.orderBy}}</span>
+                <span>Sort by: <input type="text" ng-model="orderBy" placeholder="'rating':true"></span>
+                <span>{{orderBy}}</span>
               </p>
 
-                <!-- div ng-repeat="comment in dishCtrl.dish.comments | orderBy:'rating':true" -->
-                <div ng-repeat="comment in dishCtrl.dish.comments | orderBy:dishCtrl.orderBy"> 
+                <div ng-repeat="comment in dish.comments | orderBy:orderBy">
                   <blockquote>
                     <p>{{comment.rating}} Starts</p>
                     <p>{{comment.comment}}</p>
@@ -67,10 +66,8 @@
     <script src="../bower_components/angular/angular.min.js"></script>
     <script>
 
-        var app = angular.module('confusionApp',[]);
-
-        app.controller('dishDetailController', function() {
-
+        angular.module('confusionApp',[])
+        .controller('DishDetailController', ['$scope', function($scope) {
             var dish={
                           name:'Uthapizza',
                           image: 'images/uthapizza.png',
@@ -113,9 +110,9 @@
                            ]
                     };
 
-            this.dish = dish;
+            $scope.dish = dish;
 
-        });
+        }]);
 
     </script>
 
