@@ -3,7 +3,12 @@
 
 angular.module('week3App')
 
-.factory('menuFactory', function() {
+.service('menuFactory', function() {
+
+  // In Angular, when we declare a service instead of factory,
+  // Angular will create a new object for us automatically
+  // So, we can use this to get the new object created for use
+  // And no need to create the object by ourselves.
 
   var dishes=[
     {
@@ -168,16 +173,12 @@ angular.module('week3App')
     }
   ];
 
-  var menufac = {};
-
-  menufac.getDishes = function() {
+  this.getDishes = function() {
     return dishes;
   };
 
-  menufac.getDish = function (index) {
+  this.getDish = function (index) {
     return dishes[index];
   };
-
-  return menufac;
 
 });
