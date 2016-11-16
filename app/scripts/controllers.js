@@ -2,10 +2,6 @@
 
 angular.module('week3App')
 
-  .controller('IndexController', function() {
-
-  })
-
   .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
 
       $scope.tab = 1;
@@ -79,35 +75,40 @@ angular.module('week3App')
   .controller('DishCommentController', ['$scope', function($scope) {
 
       //Step 1: Create a JavaScript object to hold the comment from the form
-      var newcomment = {
+      $scope.newcomment = {
           rating:5,
           comment:"",
           author:"",
           date:""
       };
 
-      $scope.newcomment = newcomment;
-
       $scope.submitComment = function () {
 
-          var addcomment = { };
-          addcomment.rating = newcomment.rating;
-          addcomment.author = newcomment.author;
-          addcomment.comment= newcomment.comment;
-
           //Step 2: This is how you record the date
-          addcomment.date = new Date().toISOString();
+          $scope.newcomment.date = new Date().toISOString();
 
           // Step 3: Push your comment into the dish's comment array
-          $scope.dish.comments.push(addcomment);
+          $scope.dish.comments.push($scope.newcomment);
 
           //Step 4: reset your form to pristine
           $scope.commentForm.$setPristine();
 
           //Step 5: reset your JavaScript object that holds your comment
-          newcomment.rating = 5;
-          newcomment.comment = "";
-          newcomment.author = "";
-          newcomment.date = "";
+          $scope.newcomment = {
+              rating:5,
+              comment:"",
+              author:"",
+              date:""
+          };
       };
-  }]);
+  }])
+
+  .controller('IndexController', function() {
+
+  })
+
+  .controller('AboutController', function() {
+
+  })
+
+  ;

@@ -10,7 +10,7 @@ angular.module('week3App', ['ui.router'])
             views: {
                 'header': { templateUrl : 'views/header.html' },
                 'content': {
-                    template : '<h1>To be Completed</h1>',
+                    templateUrl : 'views/home.html',
                     controller  : 'IndexController'
                 },
                 'footer': { templateUrl : 'views/footer.html' }
@@ -20,7 +20,10 @@ angular.module('week3App', ['ui.router'])
         .state('app.aboutus', {
             url:'aboutus',
             views: {
-                'content@': { template: '<h1>To be Completed</h1>' }
+                'content@': {
+                  templateUrl : 'views/aboutus.html',
+                  controller  : 'AboutController'
+                }
             }
         })
                 // route for the contactus page
