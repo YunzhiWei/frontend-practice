@@ -115,8 +115,12 @@ angular.module('week3App')
 
   }])
 
-  .controller('AboutController', function() {
+  .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
 
-  })
+    var leaders = corporateFactory.getLeaders();
+
+    $scope.leaders = leaders;
+
+  }])
 
   ;
