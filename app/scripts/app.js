@@ -2,6 +2,9 @@
 'use strict';
 
 angular.module('week3App', ['ui.router'])
+
+.constant("baseURL","http://localhost:3000/")
+
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         // route for the home page

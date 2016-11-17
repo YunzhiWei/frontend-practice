@@ -8,7 +8,11 @@ angular.module('week3App')
       $scope.filtText = '';
       $scope.showDetails = false;
 
-      $scope.dishes = menuFactory.getDishes();
+      $scope.dishes = [];
+      menuFactory.getDishes()
+      .then( function(response) {
+        $scope.dishes = response.data;
+      });
 
       $scope.select = function(setTab) {
         $scope.tab = setTab;
@@ -68,8 +72,12 @@ angular.module('week3App')
   }])
 
   .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-      var dish= menuFactory.getDish(parseInt($stateParams.id,10));
-      $scope.dish = dish;
+      var dish = {};
+      menuFactory.getDish(parseInt($stateParams.id,10))
+      .then( function(response) {
+        $scope.dish = response.data;
+        $scope.showDish = true;
+      });
   }])
 
   .controller('DishCommentController', ['$scope', function($scope) {
@@ -105,11 +113,15 @@ angular.module('week3App')
 
   .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
 
-    var dish = menuFactory.getDish(0);
     var promotion = menuFactory.getPromotion(0);
     var chef = corporateFactory.getLeader(3);
 
-    $scope.dish = dish;
+    $scope.dish = {};
+    menuFactory.getDish(0)
+    .then( function(response) {
+      $scope.dish = response.data;
+      $scope.showDish = true;
+    });
     $scope.promotion = promotion;
     $scope.chef = chef;
 
