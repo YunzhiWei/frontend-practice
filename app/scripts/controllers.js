@@ -103,9 +103,17 @@ angular.module('week3App')
       };
   }])
 
-  .controller('IndexController', function() {
+  .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
 
-  })
+    var dish = menuFactory.getDish(0);
+    var promotion = menuFactory.getPromotion(0);
+    var chef = corporateFactory.getLeader(3);
+
+    $scope.dish = dish;
+    $scope.promotion = promotion;
+    $scope.chef = chef;
+
+  }])
 
   .controller('AboutController', function() {
 
