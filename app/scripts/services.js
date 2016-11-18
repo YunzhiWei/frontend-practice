@@ -17,8 +17,12 @@ angular.module('week3App')
   // implement a function named getPromotion
   // that returns a selected promotion.
 
-  this.getPromotions = function (index) {
+  this.getPromotions = function () {
     return $resource(baseURL+"promotions/:id", null, {'update':{method:'PUT'}});
+  }
+
+  this.feedbacks = function () {
+    return $resource(baseURL+"feedback/:id", null, {'update':{method:'PUT'}});
   }
 
 }])

@@ -57,7 +57,10 @@ angular.module('week3App')
 
   }])
 
-  .controller('FeedbackController', ['$scope', function($scope) {
+  .controller('FeedbackController', ['$scope', 'menuFactory', function($scope, menuFactory) {
+
+    $scope.allFeedback = menuFactory.feedbacks().query();
+    console.log("all feedback: ", $scope.allFeedback);
 
     $scope.sendFeedback = function() {
 
@@ -68,12 +71,29 @@ angular.module('week3App')
             console.log('incorrect');
         }
         else {
+            menuFactory.feedbacks().save(
+              $scope.feedback,
+              function() {
+                alert("Your feedback is recorded!");
+                $scope.allFeedback = menuFactory.feedbacks().query();
+              }
+            );
             $scope.invalidChannelSelection = false;
             $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-            $scope.feedback.mychannel="";
             $scope.feedbackForm.$setPristine();
-            console.log($scope.feedback);
+
+            // console.log($scope.feedback);
+            // console.log($scope.allFeedback);
         }
+    };
+
+    $scope.delFB = function(index) {
+      menuFactory.feedbacks().delete(
+        {id:index},
+        function() {
+          $scope.allFeedback = menuFactory.feedbacks().query();
+        }
+      );
     };
   }])
 
