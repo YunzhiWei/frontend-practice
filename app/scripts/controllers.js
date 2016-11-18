@@ -108,8 +108,8 @@ angular.module('week3App')
 
   .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
 
-    var promotion = menuFactory.getPromotion(0);
-    var chef = corporateFactory.getLeader(3);
+    $scope.promotion = menuFactory.getPromotion(0);
+    $scope.chef = corporateFactory.getLeader(3);
 
     $scope.showDish = true;
     $scope.message = "Loading ...";
