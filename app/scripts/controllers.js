@@ -8,20 +8,9 @@ angular.module('week3App')
       $scope.filtText = '';
       $scope.showDetails = false;
 
-      $scope.showMenu = false;
+      $scope.showMenu = true;
       $scope.message = "Loading ...";
-
-      $scope.dishes = [];
-      menuFactory.getDishes()
-      .then(
-        function(response) {
-          $scope.dishes = response.data;
-          $scope.showMenu = true;
-        },
-        function(response) {
-          $scope.message = "Error: " + response.status + " " + response.statusText;
-        }
-      );
+      $scope.dishes = menuFactory.getDishes().query();
 
       $scope.select = function(setTab) {
         $scope.tab = setTab;
@@ -81,19 +70,9 @@ angular.module('week3App')
   }])
 
   .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-      $scope.dish = {};
-      $scope.showDish = false;
+      $scope.showDish = true;
       $scope.message = "Loading ...";
-      menuFactory.getDish(parseInt($stateParams.id,10))
-      .then(
-        function(response) {
-          $scope.dish = response.data;
-          $scope.showDish = true;
-        },
-        function(response) {
-          $scope.message = "Error: " + response.status + " " + response.statusText;
-        }
-      );
+      $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)});
   }])
 
   .controller('DishCommentController', ['$scope', function($scope) {
@@ -132,21 +111,9 @@ angular.module('week3App')
     var promotion = menuFactory.getPromotion(0);
     var chef = corporateFactory.getLeader(3);
 
-    $scope.dish = {};
-    $scope.showDish = false;
+    $scope.showDish = true;
     $scope.message = "Loading ...";
-    menuFactory.getDish(0)
-    .then(
-      function(response) {
-        $scope.dish = response.data;
-        $scope.showDish = true;
-      },
-      function(response) {
-        $scope.message = "Error: " + response.status + " " + response.statusText;
-      }
-    );
-    $scope.promotion = promotion;
-    $scope.chef = chef;
+    $scope.dish = menuFactory.getDishes().get({id:0});
 
   }])
 

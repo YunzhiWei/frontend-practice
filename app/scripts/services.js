@@ -3,7 +3,7 @@
 
 angular.module('week3App')
 
-.service('menuFactory', ['$http', 'baseURL', function($http, baseURL) {
+.service('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
   // In Angular, when we declare a service instead of factory,
   // Angular will create a new object for us automatically
@@ -22,13 +22,8 @@ angular.module('week3App')
   ];
 
   this.getDishes = function() {
-    return $http.get(baseURL+"dishes");
+    return $resource(baseURL+"dishes/:id", null, {'update':{method:'PUT'}});
   };
-
-  this.getDish = function (index) {
-    return $http.get(baseURL+"dishes/"+index);
-  };
-
 
   // implement a function named getPromotion
   // that returns a selected promotion.

@@ -1,7 +1,7 @@
 
 'use strict';
 
-angular.module('week3App', ['ui.router'])
+angular.module('week3App', ['ui.router', 'ngResource'])
 
 .constant("baseURL","http://localhost:3000/")
 
