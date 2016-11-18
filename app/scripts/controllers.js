@@ -126,8 +126,9 @@ angular.module('week3App')
 
   .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
 
-    $scope.promotion = menuFactory.getPromotion(0);
-    $scope.chef = corporateFactory.getLeader(3);
+    $scope.promotions = menuFactory.getPromotions().query();
+
+    $scope.chef = corporateFactory.getLeaders().get({id:3});
 
     $scope.showDish = false;
     $scope.message = "Loading ...";
@@ -146,9 +147,7 @@ angular.module('week3App')
 
   .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
 
-    var leaders = corporateFactory.getLeaders();
-
-    $scope.leaders = leaders;
+    $scope.leaders = corporateFactory.getLeaders().query();
 
   }])
 
