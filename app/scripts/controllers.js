@@ -75,6 +75,7 @@ angular.module('week3App')
               $scope.feedback,
               function() {
                 alert("Your feedback is recorded!");
+                $scope.allFeedback.splice(0, $scope.allFeedback.length);
                 $scope.allFeedback = menuFactory.feedbacks().query();
               }
             );
@@ -91,6 +92,7 @@ angular.module('week3App')
       menuFactory.feedbacks().delete(
         {id:index},
         function() {
+          $scope.allFeedback.length = 0;
           $scope.allFeedback = menuFactory.feedbacks().query();
         }
       );
